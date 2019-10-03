@@ -1,0 +1,30 @@
+{
+  "name": "embedded-content",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "node rollup.config.js"
+  },
+  "description": "A helper for embedding content into Visiba applications",
+  "author": "Visiba Care",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "jest": "^24.9.0",
+    "rollup": "^1.22.0",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-filesize": "^6.2.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "tslint-config-visibacare": "^0.2.0"
+  }
+}

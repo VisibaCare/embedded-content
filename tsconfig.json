@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "declaration": true,
+      "declarationDir": "./dist",
+      "module": "es6",
+      "outDir": "./dist",
+      "target": "es5",
+      "stripInternal": true
+    },
+    "include": [
+      "src/**/*", "tests/VisibaEmbeddedWebHelper.test.ts"
+    ],
+    "exclude": ["node_modules"]
+}
