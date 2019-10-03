@@ -11,7 +11,6 @@ enum DeviceType {
 }
 
 class VisibaEmbeddedWebHelper {
-
   constructor() {
     this.setupInternalUrlListener();
   }
@@ -48,9 +47,9 @@ class VisibaEmbeddedWebHelper {
    * @description Used to programmatically return to Visiba Care
    * @param visibaCareUrl Valid Visiba Care URL
    */
-  public returnToVisibaCare(visibaCareUrl: string) {
+  public returnToVisibaCare(visibaCareUrl: string | null = null) {
     if (this.getPlatform() === DeviceType.Web) {
-      window.top.postMessage({event: 'exitIframe', data: visibaCareUrl}, "*");
+      window.top.postMessage({ event: "exitIframe", data: visibaCareUrl }, "*");
     } else {
       window.location.href = visibaCareUrl;
     }
@@ -62,8 +61,11 @@ class VisibaEmbeddedWebHelper {
   private setupInternalUrlListener() {
     if (this.getPlatform() !== DeviceType.Web) return;
 
-    window.onbeforeunload(() => {
-      this.returnToVisibaCare((document.activeElement as HTMLLinkElement).href);
+    window.addEventListener("beforeunload", () => {
+      const navigatedUrl = (document.activeElement as HTMLLinkElement).href;
+      // TODO: validate that url is origin form querystring
+      // if (navigatedUrl)
+      this.returnToVisibaCare(navigatedUrl);
     });
   }
 
