@@ -11,6 +11,11 @@ enum DeviceType {
 }
 
 class VisibaEmbeddedWebHelper {
+
+  constructor() {
+    this.setupInternalUrlListener();
+  }
+
   /**
    * @description Submit data to Visiba Care service.
    * @param data { Type: string; Origin: string; Data: any; }[]
@@ -37,6 +42,29 @@ class VisibaEmbeddedWebHelper {
         window.top.postMessage(emittedData, "*");
         break;
     }
+  }
+
+  /**
+   * @description Used to programmatically return to Visiba Care
+   * @param visibaCareUrl Valid Visiba Care URL
+   */
+  public returnToVisibaCare(visibaCareUrl: string) {
+    if (this.getPlatform() === DeviceType.Web) {
+      window.top.postMessage({event: 'exitIframe', data: visibaCareUrl}, "*");
+    } else {
+      window.location.href = visibaCareUrl;
+    }
+  }
+
+  /**
+   * @internal
+   */
+  private setupInternalUrlListener() {
+    if (this.getPlatform() !== DeviceType.Web) return;
+
+    window.onbeforeunload(() => {
+      this.returnToVisibaCare((document.activeElement as HTMLLinkElement).href);
+    });
   }
 
   /**
