@@ -4,7 +4,7 @@ describe("Object validation", () => {
   test("correctly formatted passes validation", () => {
     const mockArray = [
       {
-        Type: "keyvalue",
+        Type: "NameValue",
         Origin: "https://origin.test.org",
         Data: [
           {
@@ -75,7 +75,7 @@ describe("Object validation", () => {
   test("missing Origin-property fails validation", () => {
     const mockArray = [
       {
-        Type: "keyvalue",
+        Type: "NameValue",
         Data: [
           {
             Name: "A thing",
@@ -94,7 +94,7 @@ describe("Object validation", () => {
     const mockArray = [
       {
         Origin: "https://origin.test.org",
-        Type: "keyvalue"
+        Type: "NameValue"
       }
     ];
 
@@ -106,7 +106,7 @@ describe("Object validation", () => {
   test("origin as non string fails validation", () => {
     const mockArray = [
       {
-        Type: "keyvalue",
+        Type: "NameValue",
         Origin: 2,
         Data: [
           {
@@ -126,7 +126,7 @@ describe("Object validation", () => {
     const mockArray = [
       {
         FakedProperty: "I should not exist",
-        Type: "keyvalue",
+        Type: "NameValue",
         Origin: 2,
         Data: [
           {

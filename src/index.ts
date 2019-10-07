@@ -1,5 +1,5 @@
 interface EmbeddedWebItem {
-  Type: "keyvalue";
+  Type: "NameValue";
   Origin: string;
   Data: any;
 }
@@ -47,7 +47,7 @@ class VisibaEmbeddedWebHelper {
    * @description Used to programmatically return to Visiba Care
    * @param visibaCareUrl Valid Visiba Care URL
    */
-  public returnToVisibaCare(visibaCareUrl: string | null = null) {
+  public returnToVisibaCare(visibaCareUrl: string) {
     if (this.getPlatform() === DeviceType.Web) {
       window.top.postMessage({ event: "exitIframe", data: visibaCareUrl }, "*");
     } else {
@@ -92,7 +92,7 @@ class VisibaEmbeddedWebHelper {
     if (!object || !Object.keys(object).length)
       return { valid: false, reason: "object not defined" };
 
-    if (!object.Type || !["keyvalue"].includes(object.Type))
+    if (!object.Type || !["NameValue"].includes(object.Type))
       return {
         valid: false,
         reason: "property Type required. Should be a valid type"
