@@ -27,7 +27,7 @@
               if (!validationResult.valid)
                   throw new Error(validationResult.reason);
           });
-          var emittedData = { event: "externalData", data: data };
+          var emittedData = { event: "externalData", data: data.map(function (content) { return JSON.stringify(content); }) };
           switch (this.getPlatform()) {
               case DeviceType.Ios:
                   window.webkit.messageHandlers["visibaEmbeddedWebData"].postMessage(emittedData);
@@ -45,7 +45,6 @@
        * @param visibaCareUrl Valid Visiba Care URL
        */
       VisibaEmbeddedWebHelper.prototype.returnToVisibaCare = function (visibaCareUrl) {
-          if (visibaCareUrl === void 0) { visibaCareUrl = null; }
           if (this.getPlatform() === DeviceType.Web) {
               window.top.postMessage({ event: "exitIframe", data: visibaCareUrl }, "*");
           }
@@ -86,7 +85,7 @@
       VisibaEmbeddedWebHelper.prototype.objectIsValid = function (object) {
           if (!object || !Object.keys(object).length)
               return { valid: false, reason: "object not defined" };
-          if (!object.Type || !["keyvalue"].includes(object.Type))
+          if (!object.Type || !["NameValue"].includes(object.Type))
               return {
                   valid: false,
                   reason: "property Type required. Should be a valid type"

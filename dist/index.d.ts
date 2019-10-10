@@ -1,5 +1,5 @@
 interface EmbeddedWebItem {
-    Type: "keyvalue";
+    Type: "NameValue";
     Origin: string;
     Data: any;
 }
@@ -14,7 +14,7 @@ declare class VisibaEmbeddedWebHelper {
      * @description Used to programmatically return to Visiba Care
      * @param visibaCareUrl Valid Visiba Care URL
      */
-    returnToVisibaCare(visibaCareUrl?: string | null): void;
+    returnToVisibaCare(visibaCareUrl: string): void;
 }
 declare const embeddedWebHelper: VisibaEmbeddedWebHelper;
 export { embeddedWebHelper };

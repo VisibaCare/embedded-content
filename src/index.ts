@@ -26,7 +26,7 @@ class VisibaEmbeddedWebHelper {
       if (!validationResult.valid) throw new Error(validationResult.reason);
     });
 
-    const emittedData = { event: "externalData", data: data };
+    const emittedData = { event: "externalData", data: data.map(content => JSON.stringify(content)) };
 
     switch (this.getPlatform()) {
       case DeviceType.Ios:
